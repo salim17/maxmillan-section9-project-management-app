@@ -20,13 +20,15 @@ function App() {
 
   function handleSaveProject(projectData) {
     setProjectsState((prevState) => {
+      const projectId = Math.random();
       const newProject = {
         ...projectData,
-        id: Math.random(),
+        id: projectId,
       };
       return {
         ...prevState,
         projects: [...projectsState.projects, newProject],
+        selectedProjectId: undefined,
       };
     });
   }
@@ -43,7 +45,10 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar createNewProject={handleCreateNewProject} />
+      <ProjectsSidebar
+        createNewProject={handleCreateNewProject}
+        projects={projectsState.projects}
+      />
       {content}
     </main>
   );
